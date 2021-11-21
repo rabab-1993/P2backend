@@ -5,17 +5,22 @@ const mongoose = require("mongoose");
 const axios = require("axios").default;
 const app = express();
 
+const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+
+// import All the Routers
+const userRoute = require('./Routers/Routes/user')
+
 // imported the db file
 require("./db/db")
 
 /* Middleware*/
 
 app.use(express.json());
+app.use('/users', userRoute)
 
 // Cors
-const cors = require("cors");
 app.use(cors());
 
 // Setup Server
@@ -23,17 +28,17 @@ const port = process.env.PORT || 5400;
 
 // Api Calls
 
-// fetching from openweathermap API
-
 app.get("/info/:name", async (req, res) => {
     const name = req.params.name;
   try {
     const openweathermap = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.WEATHER_KEY}`);
     const pixaBay = await axios.get(`https://pixabay.com/api/?key=${process.env.PIXABAY_KEY}&q=${openweathermap.data.name}&image_type=photo`);
-console.log(openweathermap.data);
-console.log(pixaBay.data);
-   
-    res.status(200)
+// console.log(openweathermap.data);
+// console.log(pixaBay.data);
+const data = [openweathermap.data, pixaBay.data]; 
+console.log(data[1].hits);
+  
+    res.status(200).send(data)
    
   } catch (error) {
     console.log(error);

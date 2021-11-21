@@ -6,9 +6,9 @@ const options = {
     useUnifiedTopology: true,
   };
 
-  const DB = process.env.DB_NAME;
+  const DB = process.env.DB;
   
-  mongoose.connect(`mongodb://localhost:27017/${DB}`, options).then(
+  mongoose.connect(`${DB}`, options).then(
     () => {
       console.log("DB Ready To Use");
     },
