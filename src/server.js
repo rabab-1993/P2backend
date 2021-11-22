@@ -11,6 +11,7 @@ dotenv.config();
 
 // import All the Routers
 const userRoute = require('./Routers/Routes/user')
+const searchRoutes = require('./Routers/Routes/search')
 
 // imported the db file
 require("./db/db")
@@ -19,6 +20,7 @@ require("./db/db")
 
 app.use(express.json());
 app.use('/users', userRoute)
+app.use('/search', searchRoutes)
 
 // Cors
 app.use(cors());
@@ -33,10 +35,9 @@ app.get("/info/:name", async (req, res) => {
   try {
     const openweathermap = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.WEATHER_KEY}`);
     const pixaBay = await axios.get(`https://pixabay.com/api/?key=${process.env.PIXABAY_KEY}&q=${openweathermap.data.name}&image_type=photo`);
-// console.log(openweathermap.data);
-// console.log(pixaBay.data);
+
 const data = [openweathermap.data, pixaBay.data]; 
-console.log(data[1].hits);
+
   
     res.status(200).send(data)
    
@@ -47,19 +48,6 @@ console.log(data[1].hits);
 
 
 
-// fetching from Pixabay API
-
-// app.get("/search/:nmae", async (req, res) => {
-//     const name = req.params.name;
-//     try {
-//     const pixaBay = await axios.get(`https://pixabay.com/api/?key=${process.env.PIXABAY_KEY}&q=${name}&image_type=photo`);
-//     const pixaBayVId = await axios.get(`https://pixabay.com/api/videos/?key=${process.env.PIXABAY_KEY}&q=${name}`);
-
-//     res.status(200).send(pixaBay.data)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })
 
 // Post Route
 app.post('/info', (req, res)=>{
