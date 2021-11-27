@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const newReminderSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    date:{type: Date, required: true },
+    cityName: { type: String, required: true, trim:true },
+    date:{type: String, required: true },
     description:{type: String },
     temp:{type: String },
     img:{type: String },
     icon:{type: String },
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
-module.exports = mongoose.model("reminde",newReminderSchema)
+module.exports = mongoose.model("Reminde",newReminderSchema)

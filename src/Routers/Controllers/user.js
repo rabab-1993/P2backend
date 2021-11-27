@@ -1,11 +1,19 @@
 const userModel = require('../../db/models/user');
 
 
+//  get All user Info
+const getUsers = (req ,res) =>{
+  userModel
+    .find({})
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+}
 
-// const getUsers = () =>{
-
-// }
-
+//  Creat new user
 const newUsersData = (req, res) => {
     const {name,  userName, email, password} = req.body;
     const creatUser = new userModel ({
@@ -20,4 +28,10 @@ const newUsersData = (req, res) => {
       });
 }
 
-module.exports = {newUsersData}
+// Update user info
+
+let updateUserInfo = (req, res) => {
+
+}
+
+module.exports = {newUsersData, getUsers, updateUserInfo}

@@ -1,11 +1,9 @@
 const express = require("express");
 const userRoutes = express.Router()
-const {newUsersData} = require ("../Controllers/user")
+const {newUsersData, getUsers, updateUserInfo} = require ("../Controllers/user")
 
-userRoutes.get('/',(req, res) => {
-    res.send('user page')
-})
+userRoutes.get('/', getUsers)
 userRoutes.post('/', newUsersData)
-userRoutes.put('/')
+userRoutes.put('/', updateUserInfo)
 
 module.exports = userRoutes
