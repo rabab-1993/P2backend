@@ -35,7 +35,7 @@ const getUserReminder = (req, res) => {
       .equals(userId)
       .exec( (err, posts) => {
         if (err) return handleError(err);
-        res.json("done");
+        res.json(posts);
       });
   };
 
