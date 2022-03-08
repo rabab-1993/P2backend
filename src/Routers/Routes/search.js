@@ -1,8 +1,9 @@
 const express = require("express");
 const searchRoutes = express.Router()
-const getResult = require("../Controllers/search")
+const {getPhotos, getVideos} = require("../Controllers/search")
 
 // fetching from Pixabay API
-searchRoutes.get("/",getResult);
+searchRoutes.get("/photos",getPhotos);
+searchRoutes.get("/videos",getVideos);
 
 module.exports = searchRoutes;
