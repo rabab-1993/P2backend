@@ -57,8 +57,7 @@ const newReminder = (req, res) => {
     });
 };
 
-// Update reminder info
-let updateRemindInfo = (req, res) => {};
+
 
 // delete reminder
 
@@ -77,7 +76,6 @@ const deleteReminder = async (req, res) => {
 module.exports = {
   newReminder,
   getCityInfo,
-  updateRemindInfo,
   getUserReminder,
   deleteReminder,
 };
